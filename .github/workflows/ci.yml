@@ -1,0 +1,39 @@
+name: "CI"
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    tags:
+    - v*.*.*
+  pull_request:
+    branches: [master]
+  release:
+    types:
+    - created
+
+jobs:
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+
+    - name: Checkout commit
+      uses: actions/checkout@v2
+
+    - name: Setup Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        make install
+    - name: Run linters
+      run: |
+        make lint
+    - name: Run tests
+      run: |
+        make test

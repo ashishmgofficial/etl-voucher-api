@@ -129,4 +129,9 @@ dmypy.json
 .pyre/
 .vscode/
 
-data/
+data/processed/
+# docker/
+tests/resources/
+tests/etl/resources/
+
+airflow/logs/

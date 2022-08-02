@@ -39,6 +39,7 @@ Following are the logic applied for calculating the `recency` and `frequency` se
 ## Assumptions
 
 1. Test raw data is loaded along with the project to the git repository. Since there is no PII content and being a POC its assumed to be fine.
+2. As an added step during the implementation phase (This is not done in EDA), I have dropped rows with `total_orders = ''` and valid `last_order_ts` and `first_order_ts` .This is because , this data is of not much use and cant be assumed valid or given default value.
 
 
 ## Driving Point

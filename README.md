@@ -36,6 +36,11 @@ Following are the logic applied for calculating the `recency` and `frequency` se
 3. At the datawarehouse, a `view` is created named `customer.recency_voucher_details_view` which calculates the most used voucher per country per sub variant segment.
 4. API retrives the details from the above view and hence is optimized and faster
 
+## Assumptions
+
+1. Test raw data is loaded along with the project to the git repository. Since there is no PII content and being a POC its assumed to be fine.
+
+
 ## Driving Point
 
 This project has been developed with extendability in mind. It is developed with an assumption that the target organization would be having data products or domain centric teams. To cater this requirement, I have implemented code such that it is organized into `Domains` and `Datasets`. Domains are the dta domains like `Customer` in our case and datasets are the different datasets under these domains like `voucher_assignments` in ur case. 
@@ -59,6 +64,10 @@ optional arguments:
 ```
 
 The flow of code is controlled by implementing a basic `Factory` pattern for domains and datasets. This makes the code easily extendable and organized.
+
+## CICD
+
+A Basic CI Github Action pipeline with linting, formatting and testing is included with the code at `.github/workflows/` folder
 
 
 ## Project Setup

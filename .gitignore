@@ -131,7 +131,5 @@ dmypy.json
 
 data/processed/
 # docker/
-tests/resources/
-tests/etl/resources/
 
 airflow/logs/

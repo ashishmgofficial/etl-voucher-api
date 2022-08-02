@@ -19,7 +19,7 @@ test:
 	pytest
 
 .PHONY: lint
-test:
+lint:
 	source venv/bin/activate
 	flake8 src/
 	isort src/

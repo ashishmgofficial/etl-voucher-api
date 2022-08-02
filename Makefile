@@ -18,6 +18,13 @@ test:
 	source venv/bin/activate
 	pytest
 
+.PHONY: lint
+test:
+	source venv/bin/activate
+	flake8 src/
+	isort src/
+	black src/
+
 .PHONY: mypy
 mypy:	
 	source venv/bin/activate
@@ -41,18 +48,19 @@ clean: ## Resets the development workspace
 .PHONY: compose-prep compose-up docker-reset compose-down
 
 compose-prep:
-	mkdir -p ./docker/postgres/postgres-db-volume
+	mkdir -p ./docker/postgres/postgres-db-volume ./docker/postgres/postgres-dw-volume
 
 compose-up:
-	docker-compose --env-file ./airflow/.env -f docker-compose.yaml up -d --build --force-recreate
+	docker-compose --env-file ./airflow/.env -f docker-compose.yml up -d --build --force-recreate
 
 docker-reset:
-	docker kill $(docker ps -q)
+	docker kill $(docker ps -aq)
 	docker system prune --all --volumes -f
 
 compose-down:
-	docker-compose -f docker-compose.yaml down
+	docker-compose --env-file ./airflow/.env -f docker-compose.yml down --remove-orphans
 	sudo rm -rf docker/postgres/postgres-db-volume
+	sudo rm -rf docker/postgres/postgres-dw-volume
 
 
 

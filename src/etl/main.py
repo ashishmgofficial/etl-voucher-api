@@ -1,12 +1,19 @@
+"""Main module for the Job."""
+
 import argparse
 
 from etl.executor import Executor
 from pathlib import Path
 import etl.enums as constants
+from etl.helpers import get_spark
 
 
-def resolve_args():
+def resolve_args():  # pragma: no cover
+    """Resolves the CLI Arguments.
 
+    Returns:
+        Namespace: An argparse namespace object.
+    """
     argparser = argparse.ArgumentParser()
     argparser.add_argument(
         "-D",
@@ -28,14 +35,17 @@ def resolve_args():
     return args
 
 
-def main():
+def main():  # pragma: no cover
+    """Main method."""
     args = resolve_args()
     domain = args.domain
     dataset = args.dataset
     raw_path = f"{args.raw_basepath}/{domain}/{dataset}"
     target_path = f"{args.processed_basepath}/{domain}/{dataset}"
     executor = Executor(domain, dataset, raw_path, target_path)
-    executor.run()
+    spark = get_spark()
+    with spark:
+        executor.run(spark)
 
 
 if __name__ == "__main__":

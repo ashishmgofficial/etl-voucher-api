@@ -10,6 +10,8 @@ Following are the tech stack used for this project:
 4. `Postgres DB`: Airflow metastore and `Datawarehouse`
 5. `FastAPI`: REST API framework
 
+**Reason for choosing pyspark for main transformation is scalability. Other choices mey include Koalas ( for Pandas API lovers ) , Dask or Vaex. The whole point being distributed processing which provides us horizontal scalability on commodity hardware.
+
 Following are the logic applied for calculating the `recency` and `frequency` segments:
 
 ### Frequency Segment
